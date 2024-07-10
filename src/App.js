@@ -2,7 +2,9 @@ import { Collapse } from "antd";
 import { images } from "./config";
 import { MenuOutlined, RightOutlined, SearchOutlined } from "@ant-design/icons";
 import "./App.css";
+import { useState } from "react";
 function App() {
+  const [url, setUrl] = useState('./images/image19.png')
   const items = [
     {
       label: "Size & fit",
@@ -30,26 +32,26 @@ function App() {
           <img src="/images/shop.png" alt="" />
         </div>
       </div>
-      <div className="max-w-[1026px] flex gap-x-2 text-xs font-[400] mb-2 mx-auto">
+      <div className="max-w-[1026px] flex gap-x-2 text-sm font-[400] mb-2 mx-auto navbar">
         <button className="text-[#6E7C87]">Home</button>
         <RightOutlined style={{ color: '#B0BABF' }}/>
         <button className="text-[#6E7C87]">Catalog</button>
         <RightOutlined style={{ color: '#B0BABF' }}/>
         <button>Cotton sweatshirt</button>
       </div>
-      <div className="max-w-[1026px] grid grid-cols-10 gap-x-4 mx-auto">
-        <div className="col-span-1">
+      <div className="content">
+        <div className="item1">
           {images.map((image, i) => (
-            <div className="mb-2 w-full" key={i}>
-              <img src={image.url} alt="" className="w-full"/>
-            </div>
+            <button className={`mb-2 w-full ${url === image.url ? 'border-blue-400 border-[2px]' : ''}`} key={i} onClick={() => setUrl(image.url)}>
+              <img src={image.url} alt="" className="w-full" />
+            </button>
           ))}
         </div>
-        <div className="col-span-6">
-          <img src="/images/image18.png" alt="" className="w-full mb-2" />
+        <div className="item2">
+          <img src={url} alt="" className="w-full mb-2" />
         </div>
-        <div className="col-span-3 pl-10 text-sm">
-          <div className="bg-[#EEF0F2] p-1 font-[600] text-[14px] w-max rounded-md">
+        <div className="item3 text-sm">
+          <div className="bg-[#EEF0F2] p-1 font-[600] w-max rounded-md">
             New!
           </div>
           <div className="font-bold text-4xl text-[#252C32]">
@@ -82,7 +84,7 @@ function App() {
               Add to Wishlist
             </p>
           </div>
-          <Collapse items={items} className="mt-3" />
+          <Collapse items={items} className="mt-3 text-sm"/>
         </div>
       </div>
     </div>
